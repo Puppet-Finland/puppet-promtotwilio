@@ -1,0 +1,11 @@
+<%- | String       $sid,
+      String       $token,
+      String       $sender,
+      String       $receiver,
+      Stdlib::Port $port
+| -%>
+SID="<%= $sid %>"
+TOKEN="<%= $token %>"
+SENDER="<%= $sender %>"
+RECEIVER="<%= $receiver %>"
+PORT=<%= $port %>

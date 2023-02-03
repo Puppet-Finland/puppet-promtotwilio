@@ -1,0 +1,12 @@
+[Unit]
+Description=Send Prometheus alerts as SMS via Twilio SMS API
+After=network.target
+
+[Service]
+Type=simple
+User=root
+EnvironmentFile=/etc/promtotwilio.conf
+ExecStart=/usr/local/bin/promtotwilio
+
+[Install]
+WantedBy=multi-user.target
