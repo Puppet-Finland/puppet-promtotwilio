@@ -31,6 +31,7 @@ class promtotwilio (
       source   => $url,
       # GitHub does redirect, so use wget instead of the default (curl)
       provider => 'wget',
+      before   => File['promtotwilio'],
     }
   }
 
