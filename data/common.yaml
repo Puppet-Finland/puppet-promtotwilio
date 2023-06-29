@@ -1,1 +1,2 @@
-promtotwilio::source: 'puppet:///files/promtotwilio'
+promtotwilio::source: '/var/cache/promtotwilio'
+promtotwilio::url: 'https://github.com/Puppet-Finland/promtotwilio/releases/download/1.6.0/promtotwilio'

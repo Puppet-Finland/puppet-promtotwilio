@@ -11,18 +11,29 @@
 #   Phone number of receiver (optional parameter, representing default receiver)
 # @param port
 #   Port promtotwilio listens on
+# @param url
+#   The URL from which to download promtotwilio.
 # @param source
 #   Source of the promtotwilio binary. Could be a Puppet fileserver path or a
 #   local path.
 #
 class promtotwilio (
-  String       $sid,
-  String       $token,
-  String       $sender,
-  String       $receiver,
-  String       $source,
-  Stdlib::Port $port,
+  String                    $sid,
+  String                    $token,
+  String                    $sender,
+  String                    $receiver,
+  String                    $source,
+  Stdlib::Port              $port,
+  Optional[Stdlib::HTTPUrl] $url,
 ) {
+  if $url {
+    archive { $source:
+      source   => $url,
+      # GitHub does redirect, so use wget instead of the default (curl)
+      provider => 'wget',
+    }
+  }
+
   $conf_params = { 'sid'      => $sid,
     'token'    => $token,
     'sender'   => $sender,

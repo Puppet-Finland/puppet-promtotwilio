@@ -7,18 +7,7 @@ message (using Twilio) with the summary of the alert."
 
 ## Setup
 
-Promtotwilio is a Go binary. For now you need to compile it yourself. In order
-for the port parameter to work your promtotwilio Git repo needs to include this
-PR:
-
-* https://github.com/Swatto/promtotwilio/pull/11
-
-Once you've built *promtotwilio*, place it on the Puppet fileserver's root,
-naming it "promtotwilio". We use
-[podman-builder](https://github.com/Puppet-Finland/podman-builder) to build
-promtotwilio, but you can build it locally as well.
-
-You also need a Twilio account and before using this module should test that
+You need a Twilio account and before using this module should test that
 you can send SMS manually, e.g. with curl. 
 
 ## Usage
@@ -35,6 +24,11 @@ class { 'promtotwilio':
   port     => 9191,
 }
 ```
+
+You can download promtotwilio from a custom URL using the *url* parameter,
+or you can place a copy of *promtotwilio* on your Puppet fileserver. The
+*source* parameter defines where the Puppet File resource gets the binary
+from.
 
 The default listen port, 9090, may conflict with Prometheus. If you're using
 unpatched version of promtotwilio then port 9090 is your only choice.
