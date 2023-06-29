@@ -11,12 +11,16 @@
 #   Phone number of receiver (optional parameter, representing default receiver)
 # @param port
 #   Port promtotwilio listens on
+# @param source
+#   Source of the promtotwilio binary. Could be a Puppet fileserver path or a
+#   local path.
 #
 class promtotwilio (
   String       $sid,
   String       $token,
   String       $sender,
   String       $receiver,
+  String       $source,
   Stdlib::Port $port,
 ) {
   $conf_params = { 'sid'      => $sid,
@@ -35,7 +39,7 @@ class promtotwilio (
       ;
     ['promtotwilio']:
       name   => '/usr/local/bin/promtotwilio',
-      source => 'puppet:///files/promtotwilio', # lint:ignore:puppet_url_without_modules
+      source => $source,
       mode   => '0755',
       ;
     ['promtotwilio.service']:
